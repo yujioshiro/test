@@ -1,0 +1,133 @@
+<!--
+Front End Developer Take Home Test
+
+Yuji Oshiro [yujioshiro.com]
+(949) 309-6900
+iamyujioshiro@gmail.com
+
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Mean and Median Calculator</title>
+  <style type="text/css">
+    html {
+      font-family: sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 0px;
+      border-bottom: 2px solid grey;
+    }
+
+    h2 {
+      font-size: 1em;
+    }
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    #submit-button {
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    } */
+
+    .results {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .mean-results {
+      margin-right: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .median-results {
+      margin-left: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Mean and Median Calculator</h1>
+  <h2>Enter 3 positive numbers and click submit!</h2>
+
+  <form id="math-form">
+    <label for="firstNumber">First Number: </label><br>
+    <input type="number" id="first-number" name="firstNumber" autocomplete="off" required="true" min="1" autofocus="true"><br>
+    <label for="secondNumber">Second Number: </label><br>
+    <input type="number" id="second-number" name="secondNumber" autocomplete="off" required="true" min="1"><br>
+    <label for="thirdNumber">Third Number: </label><br>
+    <input type="number" id="third-number" name="thirdNumber" autocomplete="off" required="true" min="1"><br>
+    <input type="submit" id="submit-button">
+  </form>
+
+  <div class="results">
+    <div class="mean-results">
+      <h3>Mean</h3>
+      <h3 id="mean">-</h3>
+    </div>
+    <div class="median-results">
+      <h3>Median</h3>
+      <h3 id="median">-</h3>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('math-form');
+
+    form.addEventListener('submit', (event) => {
+
+      event.preventDefault();
+
+      // Grab the DOM elements/values
+      let firstNumber = parseInt(document.getElementById("first-number").value);
+      let secondNumber = parseInt(document.getElementById("second-number").value);
+      let thirdNumber = parseInt(document.getElementById("third-number").value);
+      const meanOutput = document.getElementById("mean");
+      const medianOutput = document.getElementById("median");
+
+      // Output the mean to the user
+      meanOutput.innerHTML = (Math.round(((firstNumber + secondNumber + thirdNumber) / 3) * 10) / 10);
+
+      // Sort the three numbers in an array and output the median
+      let numbersArray = new Array();
+      numbersArray.push(firstNumber);
+      numbersArray.push(secondNumber);
+      numbersArray.push(thirdNumber);
+      numbersArray.sort(function(a, b){return a - b});
+      medianOutput.innerHTML = numbersArray[1];
+
+    })
+  </script>
+
+</body>
+
+</html>
